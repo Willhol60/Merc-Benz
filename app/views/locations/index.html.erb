@@ -1,0 +1,34 @@
+<div class="container mt-2">
+  <h1>Code Exercise</h1>
+  <p>Enter a lat long to return museums near that location</p>
+
+  <%# header %>
+  <%# title of what's going on etc %>
+
+  <%# nicely designed search bar FORM FOR 2 inputs (lat and long) %>
+  <%= simple_form_for @location do |f| %>
+    <div class="form">
+      <%= f.input :lat, placeholder: "51.752370" %>
+      <%= f.input :long, placeholder: "-1.278720" %>
+    </div>
+    <%= f.button :submit, 'Check it out!', class: 'btn btn-primary' %>
+  <% end %>
+
+  <%# go to the api with the location instance and pull the results %>
+  <div class='output-container'>
+    <% if @landmarks %>
+      <% @landmarks.each do |landmark| %>
+        <div class='indi-container'>
+          <div class='output'>
+            <p><strong><%= landmark["text"] %></strong></p>
+            <p><%= landmark["place_name"] %></p><br>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h2 class='mt-2'>No Results - enter a correct lat and long</h2>
+    <% end %>
+  </div>
+  <%# on the left display the JSON %>
+  <%# on the right display the locations on a map %>
+</div>
